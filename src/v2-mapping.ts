@@ -1,6 +1,6 @@
 import { BigInt, log, Address, Bytes } from "@graphprotocol/graph-ts";
 import {
-  SummonComplete,
+  // SummonComplete,
   SubmitProposal,
   SubmitVote,
   ProcessProposal,
@@ -12,9 +12,9 @@ import {
   CancelProposal,
   Withdraw,
   TokensCollected,
-} from "../generated/templates/MolochV2Template/V2Moloch";
-import { Erc20 } from "../generated/templates/MolochV2Template/Erc20";
-import { Erc20Bytes32 } from "../generated/templates/MolochV2Template/Erc20Bytes32";
+} from "../generated/templates/MolochV21Template/V21Moloch";
+import { Erc20 } from "../generated/templates/MolochV21Template/Erc20";
+import { Erc20Bytes32 } from "../generated/templates/MolochV21Template/Erc20Bytes32";
 
 import {
   Moloch,
@@ -193,71 +193,71 @@ export function createAndApproveToken(molochId: string, token: Bytes): string {
 }
 
 //legacy daos will trigger this, factory daos get created in factory-mapping.ts
-export function handleSummonComplete(event: SummonComplete): void {
-  let molochId = event.address.toHex();
-  let moloch = new Moloch(molochId);
-  let daoMeta = DaoMeta.load(molochId);
+// export function handleSummonComplete(event: SummonComplete): void {
+//   let molochId = event.address.toHex();
+//   let moloch = new Moloch(molochId);
+//   let daoMeta = DaoMeta.load(molochId);
 
-  let tokens = event.params.tokens;
-  let approvedTokens: string[] = [];
+//   let tokens = event.params.tokens;
+//   let approvedTokens: string[] = [];
 
-  for (let i = 0; i < tokens.length; i++) {
-    let token = tokens[i];
-    approvedTokens.push(createAndApproveToken(molochId, token));
-    createEscrowTokenBalance(molochId, token);
-    createGuildTokenBalance(molochId, token);
-  }
+//   for (let i = 0; i < tokens.length; i++) {
+//     let token = tokens[i];
+//     approvedTokens.push(createAndApproveToken(molochId, token));
+//     createEscrowTokenBalance(molochId, token);
+//     createGuildTokenBalance(molochId, token);
+//   }
 
-  moloch.summoner = event.params.summoner;
-  moloch.summoningTime = event.params.summoningTime;
-  moloch.createdAt = event.params.summoningTime.toString();
-  moloch.title = daoMeta.title;
-  moloch.version = daoMeta.version;
-  moloch.newContract = daoMeta.newContract;
-  moloch.deleted = false;
-  moloch.periodDuration = event.params.periodDuration;
-  moloch.votingPeriodLength = event.params.votingPeriodLength;
-  moloch.gracePeriodLength = event.params.gracePeriodLength;
-  moloch.proposalDeposit = event.params.proposalDeposit;
-  moloch.dilutionBound = event.params.dilutionBound;
-  moloch.processingReward = event.params.processingReward;
-  moloch.depositToken = approvedTokens[0];
-  moloch.approvedTokens = approvedTokens;
-  moloch.totalShares = BigInt.fromI32(1);
-  moloch.totalLoot = BigInt.fromI32(0);
+//   moloch.summoner = event.params.summoner;
+//   moloch.summoningTime = event.params.summoningTime;
+//   moloch.createdAt = event.params.summoningTime.toString();
+//   moloch.title = daoMeta.title;
+//   moloch.version = daoMeta.version;
+//   moloch.newContract = daoMeta.newContract;
+//   moloch.deleted = false;
+//   moloch.periodDuration = event.params.periodDuration;
+//   moloch.votingPeriodLength = event.params.votingPeriodLength;
+//   moloch.gracePeriodLength = event.params.gracePeriodLength;
+//   moloch.proposalDeposit = event.params.proposalDeposit;
+//   moloch.dilutionBound = event.params.dilutionBound;
+//   moloch.processingReward = event.params.processingReward;
+//   moloch.depositToken = approvedTokens[0];
+//   moloch.approvedTokens = approvedTokens;
+//   moloch.totalShares = BigInt.fromI32(1);
+//   moloch.totalLoot = BigInt.fromI32(0);
 
-  moloch.save();
+//   moloch.save();
 
-  let memberId = molochId
-    .concat("-member-")
-    .concat(event.params.summoner.toHex());
-  let newMember = new Member(memberId);
-  newMember.moloch = molochId;
-  newMember.molochAddress = event.address;
-  newMember.memberAddress = event.params.summoner;
-  newMember.createdAt = event.block.timestamp.toString();
-  newMember.delegateKey = event.params.summoner;
-  newMember.shares = BigInt.fromI32(1);
-  newMember.loot = BigInt.fromI32(0);
-  newMember.exists = true;
-  newMember.tokenTribute = BigInt.fromI32(0);
-  newMember.didRagequit = false;
-  newMember.proposedToKick = false;
-  newMember.kicked = false;
+//   let memberId = molochId
+//     .concat("-member-")
+//     .concat(event.params.summoner.toHex());
+//   let newMember = new Member(memberId);
+//   newMember.moloch = molochId;
+//   newMember.molochAddress = event.address;
+//   newMember.memberAddress = event.params.summoner;
+//   newMember.createdAt = event.block.timestamp.toString();
+//   newMember.delegateKey = event.params.summoner;
+//   newMember.shares = BigInt.fromI32(1);
+//   newMember.loot = BigInt.fromI32(0);
+//   newMember.exists = true;
+//   newMember.tokenTribute = BigInt.fromI32(0);
+//   newMember.didRagequit = false;
+//   newMember.proposedToKick = false;
+//   newMember.kicked = false;
 
-  newMember.save();
+//   newMember.save();
 
-  for (let i = 0; i < tokens.length; i++) {
-    let token = tokens[i];
-    let tokenId = molochId.concat("-token-").concat(token.toHex());
-    createMemberTokenBalance(
-      molochId,
-      event.params.summoner,
-      tokenId,
-      BigInt.fromI32(0)
-    );
-  }
-}
+//   for (let i = 0; i < tokens.length; i++) {
+//     let token = tokens[i];
+//     let tokenId = molochId.concat("-token-").concat(token.toHex());
+//     createMemberTokenBalance(
+//       molochId,
+//       event.params.summoner,
+//       tokenId,
+//       BigInt.fromI32(0)
+//     );
+//   }
+// }
 
 export function handleSubmitProposal(event: SubmitProposal): void {
   let molochId = event.address.toHexString();

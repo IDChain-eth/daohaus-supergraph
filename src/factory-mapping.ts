@@ -1,16 +1,14 @@
 import { BigInt, Address, log } from "@graphprotocol/graph-ts";
-import { Register as RegisterV1 } from "../generated/V1Factory/V1Factory";
-import {
-  Register as RegisterV2,
-  Delete,
-} from "../generated/V2Factory/V2Factory";
+// import { Register as RegisterV1 } from "../generated/V1Factory/V1Factory";
+// import {
+//   Register as RegisterV2,
+//   Delete,
+// } from "../generated/V2Factory/V2Factory";
 import {
   SummonComplete,
   Register as RegisterV21,
 } from "../generated/V21Factory/V21Factory";
-import {
-  MolochV21Template,
-} from "../generated/templates";
+import { MolochV21Template } from "../generated/templates";
 
 import { Moloch, Member, DaoMeta } from "../generated/schema";
 
@@ -20,7 +18,6 @@ import {
   createGuildTokenBalance,
   createMemberTokenBalance,
 } from "./v2-mapping";
-
 
 export function handleSummonV21(event: SummonComplete): void {
   MolochV21Template.create(event.params.moloch);
@@ -93,12 +90,12 @@ export function handleRegisterV21(event: RegisterV21): void {
   daoMeta.save();
 }
 
-export function handleDelete(event: Delete): void {
-  let molochId = event.address.toHexString();
-  let moloch = Moloch.load(molochId);
-  moloch.deleted = true;
-  moloch.save();
-}
+// export function handleDelete(event: Delete): void {
+//   let molochId = event.address.toHexString();
+//   let moloch = Moloch.load(molochId);
+//   moloch.deleted = true;
+//   moloch.save();
+// }
 
 // used to create multiple summoners at time of summoning
 export function createAndAddSummoner(

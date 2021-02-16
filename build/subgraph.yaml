@@ -18,6 +18,10 @@ dataSources:
       abis:
         - name: V21Factory
           file: V21Factory/abis/V21Factory.json
+        - name: V2Moloch
+          file: V21Factory/abis/V2Moloch.json
+        - name: V21Moloch
+          file: V21Factory/abis/V21Moloch.json
         - name: Erc20
           file: V21Factory/abis/Erc20.json
         - name: Erc20Bytes32
@@ -75,6 +79,8 @@ templates:
       abis:
         - name: V21Moloch
           file: MolochV21Template/abis/V21Moloch.json
+        - name: V2Moloch
+          file: MolochV21Template/abis/V2Moloch.json
         - name: Erc20
           file: MolochV21Template/abis/Erc20.json
         - name: Erc20Bytes32

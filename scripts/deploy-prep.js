@@ -50,7 +50,7 @@ const config = {
     minionFactoryAddress: "0x9417470616865De678267DAfA6574A66Fe413451",
     minionFactoryStartBlock: 10900722,
     v21FactoryAddress: "0x6690C139564144b27ebABA71F9126611a23A31C9",
-    v21FactoryStartBlock: 11499150,
+    v21FactoryStartBlock: 10397177,
   },
 };
 

@@ -12,9 +12,9 @@
     "deploy-matic": "node scripts/deploy-prep.js matic && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ odyssy-automaton/daohaus-matic",
     "deploy-bill-dev": "node scripts/deploy-prep.js kovan && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ wswarren12/daohaus-ubergraph-bill --kovan",
     "mega-deploy": "yarn deploy-main && yarn deploy-xdai && yarn deploy-kovan && yarn deploy-rinkeby",
-    "create-local": "graph create --node http://localhost:8020/ odyssy-automaton/daohaus",
-    "remove-local": "graph remove --node http://localhost:8020/ odyssy-automaton/daohaus",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs https://ipfs.infura.io:5001 matic/daohaus-supergraph"
+    "create-local": "graph create --node http://localhost:8020/ idchain/daohaus-supergraph",
+    "remove-local": "graph remove --node http://localhost:8020/ idchain/daohaus-supergraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs https://ipfs.infura.io:5001 idchain/daohaus-supergraph"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.17.1",

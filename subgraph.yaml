@@ -4,14 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: V2Factory
-    network: kovan
-    # network: mainnet
+    network: idchain
     source:
-      address: "0xB47778d3BcCBf5e39dEC075CA5F185fc20567b1e"
-      # address: "0x1782a13f176e84Be200842Ade79daAA0B09F0418"
+      address: "0xF42aFC058B7b6f80729e43021404549F69875652"
       abi: V2Factory
-      startBlock: 16845360
-      # startBlock: 9484660
+      startBlock: 2200328
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
